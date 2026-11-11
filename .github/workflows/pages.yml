@@ -27,7 +27,17 @@ jobs:
           test -f calcscouthq-business-calculator-toolkit/index.html
           test -f jobsscouthq-remote-application-tracker/index.html
           test -f partnerscouthq-affiliate-program-scorecard/index.html
+          test -f softwarescouthq-software-comparison-scorecard/index.html
+          test -f softwarescouthq-software-comparison-scorecard/style.css
+          test -f softwarescouthq-software-comparison-scorecard/src/app.js
+          test -f softwarescouthq-software-comparison-scorecard/src/scoring.js
+          test -f softwarescouthq-software-comparison-scorecard/README.md
           test -f sitemap.xml
+      - name: Check JS syntax and run unit tests
+        run: |
+          node --check softwarescouthq-software-comparison-scorecard/src/app.js
+          node --check softwarescouthq-software-comparison-scorecard/src/scoring.js
+          node --test calcscouthq-business-calculator-toolkit/tests/*.test.js softwarescouthq-software-comparison-scorecard/tests/*.test.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .

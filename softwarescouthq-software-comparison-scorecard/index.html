@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Compare business software using transparent weighted criteria and the same estimated cost horizon. Free, browser-first, local-only software selection scorecard.">
+<meta name="theme-color" content="#f4f7fb">
+<link rel="canonical" href="https://janiceq36c92.github.io/softwarescouthq-software-comparison-scorecard/">
+<title>Software Comparison Scorecard — ScoutHQ Open Tools</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap"><a class="brand" href="../"><span class="symbol">S</span> ScoutHQ Open Tools</a><small>Free software evaluation toolkit</small></div></header>
+<section class="hero"><div class="wrap"><div class="eyebrow">SoftwareScoutHQ companion resource</div><h1>Compare software on your requirements—not the marketing.</h1><p>Build a consistent shortlist, score five decision dimensions, and estimate total costs over the same time horizon. No registration, third-party scripts, or upload of your vendor research.</p><div class="points"><span class="pill">Transparent weighted scoring</span><span class="pill">Comparable USD costs</span><span class="pill">Private browser storage</span><span class="pill">CSV & JSON export</span></div></div></section>
+<main class="wrap layout">
+<div class="main-column">
+<section class="panel" aria-labelledby="editor-title"><h2 id="editor-title">Add a software option</h2><p class="panel-description">Enter only details you have checked. No supplier prices or security ratings are pre-filled.</p>
+<form id="software-form">
+<div class="section-name">01 / Product details</div>
+<div class="field-grid">
+<div class="field"><label for="software-name">Software name *</label><input id="software-name" name="name" required maxlength="140" placeholder="e.g. Your researched CRM"></div>
+<div class="field"><label for="vendor">Vendor</label><input id="vendor" name="vendor" maxlength="140" placeholder="Vendor name"></div>
+<div class="field"><label for="category">Category</label><select id="category" name="category"><option value="">Choose a category</option><option>CRM</option><option>Project management</option><option>Accounting</option><option>HR and payroll</option><option>Marketing automation</option><option>Help desk</option><option>Collaboration</option><option>Cybersecurity</option><option>Analytics</option><option>Other</option></select></div>
+<div class="field"><label for="checked">Date last checked</label><input id="checked" type="date" name="lastChecked"></div>
+<div class="field field-full"><label for="source-url">Official vendor / pricing URL</label><input id="source-url" name="sourceUrl" type="url" placeholder="https://vendor.example/pricing" maxlength="500"><div class="help">Use the vendor's current official page whenever possible.</div></div>
+</div>
+<div class="section-name">02 / Your own rating</div>
+<p class="panel-description">Choose 1 (weak) to 5 (strong), or keep Not assessed. The score stays Unrated until every criterion has been reviewed.</p>
+<div id="rating-fields" class="ratings"></div>
+<div class="section-name">03 / Estimated costs (USD only)</div>
+<p class="panel-description">Use the same billing assumptions and horizon across alternatives. Use 0 only when a cost is confirmed to be zero.</p>
+<div class="field-grid">
+<div class="field"><label for="monthly-per-user">Monthly price per seat ($)</label><input id="monthly-per-user" name="monthlyPerUser" type="number" min="0" step="0.01" value="0" required></div>
+<div class="field"><label for="seats">Number of seats</label><input id="seats" name="seats" type="number" min="1" max="100000" step="1" value="1" required></div>
+<div class="field"><label for="monthly-platform">Other monthly costs ($)</label><input id="monthly-platform" name="monthlyPlatform" type="number" min="0" step="0.01" value="0" required></div>
+<div class="field"><label for="setup-cost">One-time fees ($)</label><input id="setup-cost" name="setupCost" type="number" min="0" step="0.01" value="0" required></div>
+</div>
+<div class="checkbox-row"><input id="cost-known" name="costKnown" type="checkbox" value="yes"><div><label for="cost-known">I have checked these cost inputs</label><p>Leave unchecked if price, fees, seats, or billing details remain uncertain; no numeric cost comparison will be shown.</p></div></div>
+<div class="field field-full" style="margin-top:13px"><label for="notes">Research notes, limitations and missing evidence</label><textarea id="notes" name="notes" maxlength="1500" placeholder="Document unmet requirements, unresolved security questions, and migration costs..."></textarea></div>
+<div class="actions"><button class="btn" id="save-button" type="submit">Save software</button><button class="btn secondary" id="cancel-button" type="button" hidden>Cancel editing</button></div><p class="status-text" id="form-status" role="status"></p>
+</form></section>
+<section class="panel" aria-labelledby="compare-title"><h2 id="compare-title">Compare your shortlist</h2><p class="panel-description">A high score reflects your own assessments, not a vendor certification. Only confirmed USD estimates appear in the total-cost column.</p>
+<div class="summary" aria-live="polite"><div class="summary-box"><strong id="saved-count">0</strong><span>Saved options</span></div><div class="summary-box"><strong id="rated-count">0</strong><span>Fully rated</span></div><div class="summary-box"><strong id="cost-count">0</strong><span>Cost estimates checked</span></div></div>
+<div class="toolbar">
+<input id="search" type="search" aria-label="Search software" placeholder="Search software, vendor or category">
+<select id="category-filter" aria-label="Filter by category"><option value="">All categories</option><option>CRM</option><option>Project management</option><option>Accounting</option><option>HR and payroll</option><option>Marketing automation</option><option>Help desk</option><option>Collaboration</option><option>Cybersecurity</option><option>Analytics</option><option>Other</option></select>
+<select id="sort" aria-label="Sort software"><option value="score">Best scored first</option><option value="cost">Lowest verified TCO first</option><option value="name">Name A–Z</option></select>
+<label class="range" for="months">Horizon <input id="months" type="number" min="1" max="60" step="1" value="12"> months</label>
+</div>
+<div class="table-wrap"><table><thead><tr><th>Software / vendor</th><th>Category</th><th>Weighted fit</th><th id="tco-header">Estimated 12-mo TCO</th><th>Checked</th><th>Vendor source</th><th>Actions</th></tr></thead><tbody id="comparison-rows"></tbody></table><div class="empty" id="empty-state">Your shortlist is empty. Add your first software option above.</div></div>
+<div class="actions"><button class="btn secondary" id="export-csv" type="button">Export CSV</button><button class="btn secondary" id="export-json" type="button">Backup JSON</button><label class="btn secondary" for="import-json" style="cursor:pointer">Import JSON <input id="import-json" type="file" accept=".json,application/json" hidden></label><button class="btn danger" id="clear-all" type="button">Clear local data</button></div>
+<p class="status-text" id="storage-status" role="status"></p>
+</section>
+<div class="privacy"><strong>Privacy:</strong> software research is saved only in this browser profile (local storage); it is not encrypted, uploaded, or synchronized. Export a backup before clearing browser data. Do not store passwords, confidential contracts, API keys, personal identifiers or private vendor quotes. <a href="../privacy.html">Read privacy details</a>.</div>
+</div>
+<aside class="aside-column">
+<section class="banner"><strong>Research business software</strong><p>Find comparison topics and product categories at SoftwareScoutHQ, then verify live prices and requirements directly with the vendor.</p><a class="btn" style="display:inline-block" href="https://softwarescouthq.com/" rel="noopener noreferrer" target="_blank">Explore SoftwareScoutHQ ↗</a></section>
+<section class="panel info"><h2>How to use the scores</h2><p>Rate every option against the same business requirements, using evidence—not brand recognition.</p><ul><li><strong>Feature fit 30%:</strong> workflows and critical requirements</li><li><strong>Security 25%:</strong> data handling, controls and assurances</li><li><strong>Usability 15%:</strong> onboarding and accessibility</li><li><strong>Integrations 15%:</strong> APIs and current stack</li><li><strong>Support 15%:</strong> channels and commitments</li></ul><p><strong>Formula:</strong> sum(rating × weight) ÷ 5 × 100.</p><p>Not assessed means <strong>Unrated</strong>, not 0. Ratings are your judgments; none represent a verified vendor audit.</p></section>
+<section class="panel info"><h2>Understand total cost</h2><p><strong>Est. TCO =</strong> (per-seat monthly rate × seats + other monthly costs) × comparison months + one-time costs.</p><p>The same horizon is applied to every product. Real costs may include taxes, consumption, contract minimums, migrations, and discounts not captured here. All costs must be entered in USD.</p></section>
+</aside></main>
+<footer class="footer"><div class="wrap"><a href="../">ScoutHQ Open Tools</a><a href="../privacy.html">Privacy</a><a href="https://github.com/JaniceQ36C92/JaniceQ36C92.github.io/tree/main/softwarescouthq-software-comparison-scorecard" rel="noopener noreferrer" target="_blank">Source & methodology</a><span>For research and planning, not a professional security or procurement assessment.</span></div></footer>
+<script type="module" src="./src/app.js"></script>
+</body></html>
