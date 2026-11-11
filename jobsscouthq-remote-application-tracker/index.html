@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A free, local-first tracker for remote and technology job applications. Organize roles, eligibility, status, and follow-up dates without uploading your data.">
+<meta name="theme-color" content="#f5f7fb">
+<link rel="canonical" href="https://janiceq36c92.github.io/jobsscouthq-remote-application-tracker/">
+<title>Remote Job Application Tracker — ScoutHQ Open Tools</title>
+<style>
+:root{--ink:#162338;--muted:#65748a;--line:#e0e7f0;--paper:#fff;--wash:#f5f7fb;--blue:#2458c6;--green:#13765a;--red:#a43a36}*{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font:14px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{padding:18px 0}.top a{font-weight:800;color:var(--ink)}.hero{padding:34px 0;background:linear-gradient(135deg,#eaf1ff,#f5f7fb 72%);border-block:1px solid #e4eaf3}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:800;color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);line-height:1.1;letter-spacing:-.05em;margin:8px 0}.lead{max-width:760px;color:#526177;font-size:16px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px}.stat b{display:block;font-size:24px;line-height:1.2}.stat span{color:var(--muted);font-size:12px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 10px 30px rgba(24,42,70,.04)}.panel h2{margin:0 0 14px;font-size:20px;letter-spacing:-.03em}.form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.field label{display:block;font-size:12px;font-weight:750;color:#526177;margin-bottom:5px}.field input,.field select,.field textarea,.toolbar input,.toolbar select{width:100%;border:1px solid #cfd8e5;border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}.field textarea{min-height:76px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus,.toolbar input:focus,.toolbar select:focus{outline:3px solid #dbe7ff;border-color:var(--blue)}.wide{grid-column:span 2}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:9px;padding:10px 14px;font:inherit;font-weight:750;cursor:pointer;background:var(--blue);color:white}.btn.secondary{background:#edf2f8;color:#314158}.btn.danger{background:#fff0ef;color:#9c302c}.btn:hover{filter:brightness(.97)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 14px}.toolbar input{flex:1;min-width:190px}.toolbar select{width:auto;min-width:155px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:920px;background:#fff}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #edf1f6;vertical-align:top}th{background:#f7f9fc;color:#53637a;font-size:11px;text-transform:uppercase;letter-spacing:.07em}td{font-size:13px}tr:last-child td{border-bottom:0}.status{display:inline-block;border-radius:999px;padding:4px 8px;background:#edf2f8;color:#43536b;font-size:11px;font-weight:750}.status.interview,.status.offer{background:#e7f6ef;color:#116044}.status.applied{background:#eaf1ff;color:#214eab}.status.rejected,.status.closed{background:#fff0ef;color:#9c302c}.row-actions{display:flex;gap:6px}.row-actions button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 8px;cursor:pointer;font-size:12px}.empty{padding:22px;text-align:center;color:var(--muted)}.privacy{background:#f1f7f4;border:1px solid #d7eadf;border-radius:12px;padding:14px;color:#426052;font-size:12px}.message{font-size:12px;color:var(--muted);margin:10px 0 0}.footer{padding:24px 0 38px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+@media(max-width:800px){.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.panel{padding:15px}.stats{gap:8px}.stat{padding:11px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a href="../">← ScoutHQ Open Tools</a></div></header>
+<section class="hero"><div class="wrap"><div class="eyebrow">JobsScoutHQ companion utility</div><h1>Keep every application moving.</h1><p class="lead">A private, local-first tracker for technology and remote roles. Record the original vacancy, check location eligibility, track each application, and plan your next follow-up.</p></div></section>
+<main class="wrap">
+<div class="stats" aria-live="polite"><div class="stat"><b id="stat-total">0</b><span>Total roles</span></div><div class="stat"><b id="stat-active">0</b><span>Active pipeline</span></div><div class="stat"><b id="stat-interview">0</b><span>Interviews</span></div><div class="stat"><b id="stat-follow">0</b><span>Follow-ups due</span></div></div>
+<section class="panel"><h2 id="form-title">Add a role</h2><form id="job-form">
+<div class="form-grid">
+<div class="field"><label for="company">Company *</label><input id="company" name="company" maxlength="120" required></div>
+<div class="field"><label for="role">Job title *</label><input id="role" name="role" maxlength="160" required></div>
+<div class="field"><label for="location">Location / eligible region</label><input id="location" name="location" maxlength="120" placeholder="e.g. United Kingdom, Remote US"></div>
+<div class="field"><label for="arrangement">Work arrangement</label><select id="arrangement" name="arrangement"><option>Fully remote</option><option>Hybrid</option><option>On-site</option><option>Unclear</option></select></div>
+<div class="field"><label for="eligibility">Location eligibility</label><select id="eligibility" name="eligibility"><option>Needs verification</option><option>Eligible</option><option>Not eligible</option></select></div>
+<div class="field"><label for="experience">Experience level</label><select id="experience" name="experience"><option>Not specified</option><option>Entry level</option><option>Junior</option><option>Mid-level</option><option>Senior</option><option>Lead / Manager</option></select></div>
+<div class="field"><label for="employment">Employment type</label><select id="employment" name="employment"><option>Full-time</option><option>Contract</option><option>Part-time</option><option>Internship</option><option>Freelance</option><option>Unclear</option></select></div>
+<div class="field"><label for="status">Application status</label><select id="status" name="status"><option>Saved</option><option>Preparing</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option><option>Closed</option></select></div>
+<div class="field"><label for="date-found">Date saved *</label><input id="date-found" name="dateFound" type="date" required></div>
+<div class="field wide"><label for="source-url">Original vacancy / employer URL</label><input id="source-url" name="sourceUrl" type="url" maxlength="500" placeholder="https://careers.example.com/job/123"></div>
+<div class="field"><label for="follow-up">Next follow-up date</label><input id="follow-up" name="followUpDate" type="date"></div>
+<div class="field wide"><label for="notes">Notes (avoid sensitive personal data)</label><textarea id="notes" name="notes" maxlength="1200" placeholder="Skills match, eligibility questions, recruiter follow-up..."></textarea></div>
+</div>
+<div class="actions"><button class="btn" id="save-button" type="submit">Save role</button><button class="btn secondary" id="cancel-edit" type="button" hidden>Cancel edit</button></div>
+<p class="message" id="form-message" role="status"></p>
+</form></section>
+<section class="panel"><h2>Your application pipeline</h2><div class="toolbar"><input id="search" type="search" placeholder="Search company, role, location or notes" aria-label="Search saved roles"><select id="filter-status" aria-label="Filter by status"><option value="">All statuses</option><option>Saved</option><option>Preparing</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option><option>Closed</option></select><button class="btn secondary" id="export-csv" type="button">Export CSV</button><button class="btn secondary" id="export-json" type="button">Backup JSON</button><label class="btn secondary" for="import-json" style="display:inline-flex;align-items:center">Import backup</label><input id="import-json" type="file" accept="application/json,.json" hidden></div><div class="table-wrap"><table><thead><tr><th>Company / role</th><th>Location</th><th>Work type</th><th>Eligibility</th><th>Status</th><th>Follow-up</th><th>Original vacancy</th><th>Actions</th></tr></thead><tbody id="job-rows"></tbody></table><div class="empty" id="empty-state">No roles yet. Add your first opportunity above.</div></div><div class="actions"><button class="btn danger" id="clear-all" type="button">Clear all local records</button></div><p class="message" id="storage-message" role="status"></p></section>
+<section class="privacy"><strong>Local privacy note:</strong> records are stored only in this browser profile using local storage. They are not uploaded or synchronized. Anyone with access to this browser profile may be able to view them. Export a backup before clearing browser data. Do not store passwords, identity documents, bank details, or confidential information.</section>
+<section class="panel"><h2>Find relevant opportunities</h2><p class="message">Use the directory to discover roles, then verify the vacancy, eligibility, and application instructions on the employer's original site.</p><p><a href="https://jobsscouthq.com/jobs" target="_blank" rel="noopener noreferrer">Browse technology and remote jobs at JobsScoutHQ ↗</a></p></section>
+</main>
+<footer class="footer"><div class="wrap"><a href="../">ScoutHQ Open Tools</a> · <a href="../privacy.html">Privacy</a> · <a href="https://github.com/JaniceQ36C92/JaniceQ36C92.github.io/tree/main/jobsscouthq-remote-application-tracker" target="_blank" rel="noopener noreferrer">Source code</a></div></footer>
+<script>
+(function(){
+"use strict";
+const KEY="scouthq.job-tracker.v1";
+const form=document.getElementById("job-form");
+const tbody=document.getElementById("job-rows");
+const empty=document.getElementById("empty-state");
+const message=document.getElementById("storage-message");
+let jobs=load();
+let editingId=null;
+function today(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10);}
+function id(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():"job-"+Date.now()+"-"+Math.random().toString(16).slice(2);}
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(v)?v:[];}catch(e){return [];}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(jobs));message.textContent="Saved in this browser only.";}catch(e){message.textContent="Browser storage is unavailable or full. Export a backup and check browser settings.";}}
+function node(tag,text,className){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(className)n.className=className;return n;}
+function safeUrl(raw){try{const u=new URL(raw);return (u.protocol==="https:"||u.protocol==="http:")?u.href:"";}catch(e){return "";}}
+function cell(row,text){const td=node("td",text||"—");row.appendChild(td);return td;}
+function render(){
+const query=document.getElementById("search").value.trim().toLowerCase();
+const status=document.getElementById("filter-status").value;
+const filtered=jobs.filter(function(j){const text=[j.company,j.role,j.location,j.notes].join(" ").toLowerCase();return (!query||text.includes(query))&&(!status||j.status===status);}).sort(function(a,b){return (b.dateFound||"").localeCompare(a.dateFound||"");});
+tbody.replaceChildren();
+filtered.forEach(function(j){
+const tr=document.createElement("tr");
+const first=cell(tr,j.company+" — "+j.role);
+const small=node("div",j.experience+" · "+j.employment);small.style.color="#65748a";small.style.fontSize="11px";first.appendChild(small);
+cell(tr,j.location);
+cell(tr,j.arrangement);
+cell(tr,j.eligibility);
+const statusCell=cell(tr);statusCell.appendChild(node("span",j.status,"status "+j.status.toLowerCase().replace(/[^a-z]+/g,"-")));
+cell(tr,j.followUpDate||"—");
+const linkCell=cell(tr);
+const url=safeUrl(j.sourceUrl||"");
+if(url){const a=node("a","Open source ↗");a.href=url;a.target="_blank";a.rel="noopener noreferrer";linkCell.appendChild(a);}else{linkCell.textContent="Not added";}
+const actions=cell(tr);actions.className="row-actions";
+const edit=node("button","Edit");edit.type="button";edit.dataset.action="edit";edit.dataset.id=j.id;actions.appendChild(edit);
+const del=node("button","Delete");del.type="button";del.dataset.action="delete";del.dataset.id=j.id;actions.appendChild(del);
+tbody.appendChild(tr);
+});
+empty.hidden=filtered.length>0;
+document.getElementById("stat-total").textContent=String(jobs.length);
+document.getElementById("stat-active").textContent=String(jobs.filter(j=>!["Rejected","Closed"].includes(j.status)).length);
+document.getElementById("stat-interview").textContent=String(jobs.filter(j=>j.status==="Interview").length);
+document.getElementById("stat-follow").textContent=String(jobs.filter(j=>j.followUpDate&&j.followUpDate<=today()&&!["Rejected","Closed","Offer"].includes(j.status)).length);
+}
+function resetForm(){form.reset();document.getElementById("date-found").value=today();editingId=null;document.getElementById("form-title").textContent="Add a role";document.getElementById("save-button").textContent="Save role";document.getElementById("cancel-edit").hidden=true;}
+form.addEventListener("submit",function(event){
+event.preventDefault();
+if(!form.reportValidity())return;
+const data=Object.fromEntries(new FormData(form).entries());
+const source=data.sourceUrl? safeUrl(data.sourceUrl):"";
+if(data.sourceUrl&&!source){document.getElementById("form-message").textContent="Enter a valid http or https vacancy URL.";return;}
+const record={id:editingId||id(),company:data.company.trim(),role:data.role.trim(),location:data.location.trim(),arrangement:data.arrangement,eligibility:data.eligibility,experience:data.experience,employment:data.employment,status:data.status,dateFound:data.dateFound,sourceUrl:source,followUpDate:data.followUpDate,notes:data.notes.trim(),updatedAt:new Date().toISOString()};
+if(editingId){jobs=jobs.map(j=>j.id===editingId?record:j);}else{jobs.push(record);}
+save();render();resetForm();document.getElementById("form-message").textContent="Role saved.";
+});
+document.getElementById("cancel-edit").addEventListener("click",resetForm);
+tbody.addEventListener("click",function(event){
+const button=event.target.closest("button[data-action]");if(!button)return;
+const job=jobs.find(j=>j.id===button.dataset.id);if(!job)return;
+if(button.dataset.action==="delete"){if(!confirm("Delete this role from this browser?"))return;jobs=jobs.filter(j=>j.id!==job.id);save();render();if(editingId===job.id)resetForm();}
+if(button.dataset.action==="edit"){
+editingId=job.id;
+["company","role","location","arrangement","eligibility","experience","employment","status"].forEach(function(k){form.elements[k].value=job[k]||"";});
+form.elements.dateFound.value=job.dateFound||today();form.elements.sourceUrl.value=job.sourceUrl||"";form.elements.followUpDate.value=job.followUpDate||"";form.elements.notes.value=job.notes||"";
+document.getElementById("form-title").textContent="Edit role";document.getElementById("save-button").textContent="Update role";document.getElementById("cancel-edit").hidden=false;form.scrollIntoView({behavior:"smooth",block:"start"});
+}
+});
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filter-status").addEventListener("change",render);
+function download(name,content,type){const blob=new Blob([content],{type:type});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
+function csvValue(v){const s=String(v==null?"":v);return '"'+s.replace(/"/g,'""')+'"';}
+document.getElementById("export-csv").addEventListener("click",function(){const keys=["company","role","location","arrangement","eligibility","experience","employment","status","dateFound","sourceUrl","followUpDate","notes"];const lines=[keys.join(",")].concat(jobs.map(j=>keys.map(k=>csvValue(j[k])).join(",")));download("job-application-tracker.csv",lines.join("\r\n"),"text/csv;charset=utf-8");});
+document.getElementById("export-json").addEventListener("click",function(){download("job-application-tracker-backup.json",JSON.stringify(jobs,null,2),"application/json");});
+document.getElementById("import-json").addEventListener("change",async function(event){const file=event.target.files&&event.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!Array.isArray(parsed))throw new Error("Backup must contain a list of records.");const clean=parsed.filter(j=>j&&typeof j.company==="string"&&typeof j.role==="string").map(j=>Object.assign({},j,{id:j.id||id(),sourceUrl:safeUrl(j.sourceUrl||"")}));if(!confirm("Import "+clean.length+" records? Existing records with the same ID will be replaced."))return;const map=new Map(jobs.map(j=>[j.id,j]));clean.forEach(j=>map.set(j.id,j));jobs=Array.from(map.values());save();render();message.textContent="Backup imported. Check the records before relying on them.";}catch(e){message.textContent="Could not import backup: "+e.message;}finally{event.target.value="";}});
+document.getElementById("clear-all").addEventListener("click",function(){if(!jobs.length)return;if(!confirm("Permanently clear all job records stored in this browser? Export a backup first if needed."))return;jobs=[];save();render();resetForm();});
+document.getElementById("date-found").value=today();
+render();
+})();
+</script>
+</body></html>

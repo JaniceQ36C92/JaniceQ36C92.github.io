@@ -1,0 +1,33 @@
+{
+  "name": "calcscouthq-business-calculator-toolkit",
+  "version": "1.0.0",
+  "description": "Dependency-free business calculation functions for gross margin, markup, break-even, ROI and cash runway.",
+  "type": "module",
+  "main": "./src/calculations.js",
+  "exports": {
+    ".": "./src/calculations.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "business-calculators",
+    "gross-margin",
+    "break-even",
+    "roi",
+    "cash-runway"
+  ],
+  "homepage": "https://calcscouthq.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JaniceQ36C92/JaniceQ36C92.github.io.git",
+    "directory": "calcscouthq-business-calculator-toolkit"
+  },
+  "bugs": {
+    "url": "https://github.com/JaniceQ36C92/JaniceQ36C92.github.io/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
